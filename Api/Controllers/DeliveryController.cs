@@ -23,9 +23,8 @@ namespace Glue.Controllers
         }
 
         [HttpPost("Create")]
-        public Delivery Create([FromBody]CreateDeliveryRequest request)
+        public Delivery Create([FromBody]Delivery delivery)
         {
-            var delivery = new Delivery { Id = 1 };
             Repo.Create(delivery);
             return delivery;
         }

@@ -5,9 +5,9 @@ using System.Text;
 namespace Model
 {
     public enum State { Created, Approved, Completed, Cancelled, Expired }
-   public class Delivery
+    public class Delivery
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public State State { get; set; }
         public AccessWindow AccessWindow { get; set; }
         public Customer Recipient { get; set; }
