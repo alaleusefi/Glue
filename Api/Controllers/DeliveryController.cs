@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using API.Repositories;
 using API.Request;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -13,47 +14,21 @@ namespace Glue.Controllers
     [Route("[controller]")]
     public class DeliveryController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
+        private readonly IDeliveryRepository Repo;
+        private readonly ILogger<DeliveryController> Logger;
 
-        private readonly ILogger<DeliveryController> _logger;
-
-        public DeliveryController(ILogger<DeliveryController> logger)
+        public DeliveryController(ILogger<DeliveryController> logger, IDeliveryRepository repo)
         {
-            _logger = logger;
+            Logger = logger;
+            Repo = repo;
         }
-
-        [HttpGet]
-        public IEnumerable<WeatherForecast> Get()
-        {
-            var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
-            })
-            .ToArray();
-        }
-
 
         [HttpPost("Create")]
         public Delivery Create([FromBody]CreateDeliveryRequest request)
         {
-            try
-            {
-                Console.WriteLine("Create delivery");
-                //Create the delivery object
-                var delivery = new Delivery { Id = 1 };
-                return delivery;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                throw;
-            }
+            var delivery = new Delivery { Id = 1 };
+            Repo.Create(delivery);
+            return delivery;
         }
     }
 }
