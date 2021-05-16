@@ -12,6 +12,7 @@ namespace API.Repositories
         public Delivery Create(Delivery delivery)
         {
             delivery.Id = Guid.NewGuid();
+            delivery.Validate();
             DataStore.Add(delivery);
             return delivery;
         }
