@@ -2,23 +2,25 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using API.Request;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Model;
 
 namespace Glue.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class WeatherForecastController : ControllerBase
+    public class DeliveryController : ControllerBase
     {
         private static readonly string[] Summaries = new[]
         {
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
 
-        private readonly ILogger<WeatherForecastController> _logger;
+        private readonly ILogger<DeliveryController> _logger;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public DeliveryController(ILogger<DeliveryController> logger)
         {
             _logger = logger;
         }
@@ -34,6 +36,24 @@ namespace Glue.Controllers
                 Summary = Summaries[rng.Next(Summaries.Length)]
             })
             .ToArray();
+        }
+
+
+        [HttpPost("Create")]
+        public Delivery Create([FromBody]CreateDeliveryRequest request)
+        {
+            try
+            {
+                Console.WriteLine("Create delivery");
+                //Create the delivery object
+                var delivery = new Delivery { Id = 1 };
+                return delivery;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw;
+            }
         }
     }
 }
