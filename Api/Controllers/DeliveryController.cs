@@ -28,5 +28,11 @@ namespace Glue.Controllers
             Repo.Create(delivery);
             return delivery;
         }
+
+        [HttpGet("Get/{id}")]
+        public Delivery Get(string id)
+        {
+            return Repo.Get(new Guid(id));
+        }
     }
 }
