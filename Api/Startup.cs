@@ -2,7 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using API.Repositories;
+using Logic;
+using Logic.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -28,6 +29,7 @@ namespace Glue
         {
             services.AddControllers();
             services.AddSingleton<IDeliveryRepository, DeliveryRepoMock>();
+            services.AddTransient<IDeliveryLogic, DeliveryLogic>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
