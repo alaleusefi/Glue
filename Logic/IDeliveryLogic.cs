@@ -8,8 +8,8 @@ namespace Logic
     public interface IDeliveryLogic
     {
         public Delivery Approve(Guid Id);
-        //TODO: Cancel method
-        //TODO: Expire method
-        //TODO: Complete method
+        public Delivery Cancel(Guid Id);
+        public Delivery Expire(Guid Id);
+        public Delivery Complete(Guid Id);
     }
 }

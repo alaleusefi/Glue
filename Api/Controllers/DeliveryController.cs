@@ -53,15 +53,13 @@ namespace Glue.Controllers
         [HttpPost("Complete/{id}")]
         public Delivery Complete(string id)
         {
-            // return Logic.Complete(new Guid(id));
-            throw new NotImplementedException();
+             return Logic.Complete(new Guid(id));
         }
 
         [HttpPost("Cancel/{id}")]
         public Delivery Cancel(string id)
         {
-            // return Logic.Cancel(new Guid(id));
-            throw new NotImplementedException();
+             return Logic.Cancel(new Guid(id));
         }
     }
 }

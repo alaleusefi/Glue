@@ -15,5 +15,17 @@ namespace Logic
         {
            return Repo.Update(Id, x => x.State = State.Approved);
         }
+        public Delivery Cancel(Guid Id)
+        {
+            return Repo.Update(Id, x => x.State = State.Cancelled);
+        }
+        public Delivery Expire(Guid Id)
+        {
+            return Repo.Update(Id, x => x.State = State.Expired);
+        }
+        public Delivery Complete(Guid Id)
+        {
+            return Repo.Update(Id, x => x.State = State.Completed);
+        }
     }
 }
